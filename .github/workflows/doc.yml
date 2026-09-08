@@ -1,7 +1,7 @@
 name: Build and deploy Sphinx documentation to Pages
 
 on:
-  # Build and deploy documentation after changes are merged to main
+  # Build and deploy documentation after changes are merged to master
   push:
     branches: [master]
 
@@ -13,6 +13,8 @@ on:
 jobs:
   pages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Install Pandoc
@@ -29,7 +31,7 @@ jobs:
           requirements_path: ./doc/requirements.txt
 
       - name: Deploy documentation
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
