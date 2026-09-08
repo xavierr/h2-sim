@@ -1,0 +1,3 @@
+[submodule "mrst"]
+	path = mrst
+	url = https://github.com/ElyesAhmed/MRST.git
