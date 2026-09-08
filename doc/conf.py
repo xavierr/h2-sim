@@ -36,7 +36,7 @@ nbsphinx_prolog = r"""
 
 .. note::
 
-   This notebook is already available in your BattMo installation. In Matlab, run
+   This notebook is already available in your installation. In Matlab, run
 
    .. code-block:: matlab
 
@@ -93,9 +93,6 @@ import matplotlib.pyplot
 
 autosectionlabel_prefix_document = True
 
-global_substitutions = {
-    'battmo': '**BattMo**'
-}
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -109,9 +106,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'BattMo'
-copyright = '2021-2026'
-author = 'Xavier Raynaud, Augut Johansson, Simon Clark'
+project = 'H2-Sim'
+# copyright = '2021-2026'
+author = 'Elyes Ahmed, Xavier Raynaud'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -212,8 +209,8 @@ html_theme_options = {
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'battmologo.png'
-html_favicon = 'battmologo.ico'
+# html_logo = 'battmologo.png'
+# html_favicon = 'battmologo.ico'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -383,98 +380,3 @@ add_module_names=False
 
 # MatAttributeDocumenter.add_directive_header = _add_directive_header
 
-
-repo_url    = 'https://github.com/BattMoTeam/BattMo'
-branch_name = 'main'
-
-def find_battmo_file(filename):
-    ignored_dirs = ['output', 'Externals', '.git', '.github']
-    for root, dirs, files in os.walk(matlab_src_dir):
-        for r in ignored_dirs:
-            if r in dirs:
-                dirs.remove(r)
-        if filename in files:
-            return os.path.join(os.path.relpath(root, matlab_src_dir),
-                                filename)
-    raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), filename)
-
-
-class BattMoRole(ReferenceRole):
-
-    def run(self):
-        target = self.target
-        title = self.title
-        if "#" in target:
-            target, lineno = docutils.utils.unescape(target).split("#", 1)
-        else:
-            lineno = None
-        mfuncname = target + '.m'
-        target = find_battmo_file(mfuncname)
-        target = repo_url + '/blob/' + branch_name + '/' + target
-        if lineno is not None:
-            target += "#L"+lineno
-        node = docutils.nodes.reference(self.rawtext, title, refuri=target)
-        return [node], []
-
-
-roles.register_local_role('battmo', BattMoRole())
-
-
-class BattMoFileRole(ReferenceRole):
-
-    def run(self):
-        target = self.target
-        title = self.title
-        if "#" in target:
-            target, lineno = docutils.utils.unescape(target).split("#", 1)
-        else:
-            lineno = None
-        target = repo_url + '/blob/' + branch_name + '/' + target
-        if lineno is not None:
-            target += "#L"+lineno
-        node = docutils.nodes.reference(self.rawtext, title, refuri=target)
-        return [node], []
-
-
-roles.register_local_role('battmofile', BattMoFileRole())
-
-class BattMoRawFileRole(ReferenceRole):
-
-    def run(self):
-        target = self.target
-        title = self.title
-        if "#" in target:
-            target, lineno = docutils.utils.unescape(target).split("#", 1)
-        else:
-            lineno = None
-        target = repo_url + '/raw/' + branch_name + '/' + target
-        if lineno is not None:
-            target += "#L"+lineno
-        node = docutils.nodes.reference(self.rawtext, title, refuri=target)
-        return [node], []
-
-
-roles.register_local_role('battmorawfile', BattMoRawFileRole())
-
-
-mrst_repo_url    = 'https://github.com/SINTEF-AppliedCompSci/MRST'
-mrst_branch_name = 'battmo'
-
-
-class MrstFileRole(ReferenceRole):
-
-    def run(self):
-        target = self.target
-        title = self.title
-        if "#" in target:
-            target, lineno = docutils.utils.unescape(target).split("#", 1)
-        else:
-            lineno = None
-        target = mrst_repo_url + '/blob/' + mrst_branch_name + '/' + target
-        if lineno is not None:
-            target += "#L"+lineno
-        node = docutils.nodes.reference(self.rawtext, title, refuri=target)
-        return [node], []
-
-
-roles.register_local_role('mrstfile', MrstFileRole())
