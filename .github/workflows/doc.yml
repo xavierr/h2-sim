@@ -3,7 +3,7 @@ name: Build and deploy Sphinx documentation to Pages
 on:
   # Build and deploy documentation after changes are merged to main
   push:
-    branches: [main]
+    branches: [master]
 
   # Build documentation for PRs that touch Documentation/**
   pull_request:
