@@ -52,7 +52,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-existing-installation">Update existing installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comments">Comments</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="biochem.html">Bio-Chemistry Module for Hydrogen Storage Simulation</a><ul>
@@ -65,6 +66,27 @@
 <li class="toctree-l1"><a class="reference internal" href="store.html">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html">1D Compositional Simulation with Bio-Clogging (MRST-style, release-ready)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Setup-base-compositional-model">Setup base compositional model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Mimic-simple-well-effects-by-altering-boundary-cells">Mimic simple well effects by altering boundary cells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#EOS-setup:-Soreide-Whitson">EOS setup: Soreide-Whitson</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Residual-saturations-and-relperm-adjustments">Residual saturations and relperm adjustments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Initial-conditions">Initial conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Bio-clogging-model">Bio-clogging model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Biochemistry-model-wrapper">Biochemistry model wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Shut-Wells">Shut Wells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Initialize-state">Initialize state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-1:-with-bacterial-clogging">Scenario 1: with bacterial clogging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-2:-bacteria-but-no-clogging">Scenario 2: bacteria but no clogging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-3:-abiotic-(no-bacteria)">Scenario 3: abiotic (no bacteria)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Compare-scenarios">Compare scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Plot-results">Plot results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Copyright-notice">Copyright notice</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
@@ -96,12 +118,34 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>The source code of H2sym can be installed using git. In this way, you can easily keep track of the
+last developments.</p>
+<p>First, open a terminal and navigate to the directory where you would like to install H2sym. Then, clone the repository
+using the following command, which will include all the dependencies as submodules</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/xavierr/h2-sim.git
+</pre></div>
+</div>
+<p>Then, run <code class="code docutils literal notranslate"><span class="pre">startupH2sim.m</span></code></p>
+<section id="update-existing-installation">
+<h2>Update existing installation<a class="headerlink" href="#update-existing-installation" title="Link to this heading"></a></h2>
+<p>In the case where we alread have installed H2sym and you want to update to the latest version. As usual in git, you
+will do that by running</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
+</pre></div>
+</div>
+<p>In addition to that, the dependencies that are given through git submodules. The are not updated often but, if it is the
+case, you will need to run in addition to the previous command,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--recursive
+</pre></div>
+</div>
+</section>
+<section id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Link to this heading"></a></h2>
+<p>This package is built upon</p>
 <ul class="simple">
 <li><p><strong>MATLAB</strong>: Version R2021a or newer</p></li>
 <li><p><strong>MRST</strong>: MATLAB Reservoir Simulation Toolbox (2023b or newer)</p></li>
-<li><p><strong>Required MRST Modules</strong>:</p>
+<li><p><strong>MRST Modules</strong>:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">compositional</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ad-blackoil</span></code></p></li>
