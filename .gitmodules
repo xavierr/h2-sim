@@ -1,3 +1,6 @@
 [submodule "mrst"]
 	path = submodules/mrst
 	url = https://github.com/ElyesAhmed/MRST.git
+[submodule "PhreeqcMatlab"]
+	path = submodules/PhreeqcMatlab
+	url = https://github.com/simulkade/PhreeqcMatlab.git
