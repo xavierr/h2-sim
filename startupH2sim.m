@@ -13,7 +13,7 @@ fprintf('H2sim is based on MRST, which will now be initialized.\n\n');
 
 rootdirname = fileparts(mfilename('fullpath'));
 
-run(fullfile(rootdirname, 'mrst', 'startup'));
+run(fullfile(rootdirname, 'submodules', 'mrst', 'startup'));
 
 dirnames = {'h2-biochem', ...
             'h2-store', ...
@@ -28,7 +28,7 @@ end
 if mrstPlatform('octave')
 
     % Octave MRST settings
-    run(fullfile('Externals', 'mrst', 'core', 'utils', 'octave_only', 'startup_octave.m'));
+    run(fullfile(rootdirname, 'submodules', 'mrst', 'core', 'utils', 'octave_only', 'startup_octave.m'));
 
     % Disable warnings
     warning('off', 'Octave:possible-matlab-short-circuit-operator');
