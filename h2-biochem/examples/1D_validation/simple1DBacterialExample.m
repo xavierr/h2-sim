@@ -20,8 +20,6 @@
 % Reference: https://www.sciencedirect.com/science/article/pii/S0360319925039473
 % ===========================================================================
 
-mrstModule add ad-core ad-props deckformat mrst-gui
-mrstModule add compositional h2-biochem
 mrstVerbose off;
 
 %% Setup base compositional model

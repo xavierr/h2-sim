@@ -99,7 +99,7 @@ classdef SequentialBiochemistryPhreeqcModelReferenceTest < matlab.unittest.TestC
 
     methods (TestClassSetup)
         function setupAndRunBothDrivers(testCase)
-            mrstModule add ad-core ad-props compositional deckformat h2-biochem
+            mrstModule add ad-core ad-props compositional deckformat 
             databaseFile = resolveReferenceTestDatabaseFile();
             testCase.assumeTrue(~isempty(databaseFile) && isIPhreeqcComAvailableForReferenceTest(), ...
                 ['A registered IPhreeqcCOM server and an on-disk ', ...

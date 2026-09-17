@@ -29,7 +29,7 @@
 
 %% Initialization
 clear; clc;
-mrstModule add h2-biochem compositional ad-blackoil ad-core ad-props mrst-gui
+mrstModule add  compositional ad-blackoil ad-core ad-props mrst-gui
 
 gravity reset on
 

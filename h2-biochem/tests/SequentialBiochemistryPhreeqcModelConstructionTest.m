@@ -46,7 +46,7 @@ classdef SequentialBiochemistryPhreeqcModelConstructionTest < matlab.unittest.Te
 
     methods (TestClassSetup)
         function setupSharedComponents(testCase)
-            mrstModule add ad-core ad-props compositional deckformat h2-biochem
+            mrstModule add ad-core ad-props compositional deckformat 
             [~, model] = setupH2StorageExampleWithSRB_benchmark( ...
                 'gridCells', 3, 'domainLength', 5, 'scheduleMode', 'injection');
             testCase.G            = model.G;

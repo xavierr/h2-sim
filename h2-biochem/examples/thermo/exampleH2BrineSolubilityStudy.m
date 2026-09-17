@@ -34,7 +34,7 @@ along with MRST. If not, see <http://www.gnu.org/licenses/>.
 
 clear; clc;
 
-mrstModule add biochemistry compositional ad-blackoil ad-core ad-props h2store mrst-gui
+mrstModule add biochemistry compositional ad-blackoil ad-core ad-props  mrst-gui
 
 
 % Input Parameters for Temperature, Pressure, and Salinity

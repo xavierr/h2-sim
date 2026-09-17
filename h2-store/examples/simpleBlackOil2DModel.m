@@ -14,7 +14,7 @@
 % - Region-dependent relative permeability
 % - Miscible and immiscible flow options
 %% Load Required MRST Modules
-mrstModule add ad-core ad-blackoil ad-props mrst-gui spe10 deckformat h2store
+mrstModule add ad-core ad-blackoil ad-props mrst-gui spe10 deckformat 
 
 %% Initialize Gravity
 gravity reset on

@@ -4,7 +4,7 @@ function comparison = exampleCompositionalBacterial1DPhreeqcMinerals(varargin)
 % The test uses the 50-day injection period, no bio-clogging, and the same
 % grid, flow controls, brine, biomass, and transport settings in all cases.
 
-mrstModule add ad-core ad-props compositional deckformat h2-biochem
+mrstModule add ad-core ad-props compositional deckformat 
 
 opt = struct( ...
     'phreeqcDatabaseFile', '', ...

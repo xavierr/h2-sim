@@ -84,7 +84,7 @@ function study = runOneDTransportRegimeStudy(varargin)
 %   runTransportEffectsSensitivity, setupH2StorageExampleWithSRB_benchmark,
 %   paperFigure, paperExport
 
-    mrstModule add ad-props compositional deckformat h2-biochem
+    mrstModule add ad-props compositional deckformat 
 
     % Pull 'cases' out of varargin before merge_options, which type-checks
     % against the default and would reject a string/cellstr value.

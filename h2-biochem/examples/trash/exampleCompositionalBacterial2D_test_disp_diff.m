@@ -13,7 +13,7 @@
 % ===========================================================================
 
 mrstModule add ad-core ad-blackoil ad-props deckformat mrst-gui upr test-suite spe10
-mrstModule add compositional h2-biochem h2store
+mrstModule add compositional  
 
 %% 1. Load and setup the base model (common to all scenarios)
 baseName = 'H2_STORAGE_DOME_TRAP';

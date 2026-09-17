@@ -31,7 +31,7 @@ along with MRST. If not, see <http://www.gnu.org/licenses/>.
 clearvars;
 
 mrstModule add ad-core ad-blackoil ad-props deckformat mrst-gui upr test-suite spe10
-mrstModule add compositional h2-biochem h2store
+mrstModule add compositional  
 
 baseName = 'H2_STORAGE_DOME_TRAP';
 dataPath = getDatasetPath('h2storage');

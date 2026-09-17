@@ -50,7 +50,7 @@ function summary = exampleSequentialBiochemistryPhreeqc1D(varargin)
 %   convertToSequentialBiochemistryPhreeqcModel,
 %   setupH2StorageExampleWithSRB_benchmark, runThreeBackendComparison
 
-    mrstModule add ad-core ad-props compositional deckformat h2-biochem
+    mrstModule add ad-core ad-props compositional deckformat 
 
     opt = struct( ...
         'phreeqcDatabaseFile', '', ...

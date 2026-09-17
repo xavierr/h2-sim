@@ -9,7 +9,7 @@
 
 clearvars;
 mrstModule add ad-core ad-blackoil ad-props deckformat mrst-gui upr test-suite spe10
-mrstModule add compositional h2-biochem h2store
+mrstModule add compositional  
 
 databaseSource = getenv('PHREEQC_DATABASE_FILE');
 if isempty(strtrim(databaseSource))

@@ -4,7 +4,7 @@ function results = runMolecularDiffusionDemonstration()
 % The shorter column and long shut-in make molecular transport resolvable
 % without changing the physical diffusion coefficients. No files are written.
 
-    mrstModule add ad-props compositional deckformat h2-biochem
+    mrstModule add ad-props compositional deckformat 
 
     caseNames = ["No molecular diffusion"; "Molecular diffusion"];
     diffusionEnabled = [false; true];

@@ -26,7 +26,7 @@ function results = runTransportEffectsSensitivity(varargin)
 %   db = '/path/to/PHREEQC_Modified.DAT';
 %   results = runTransportEffectsSensitivity('phreeqcDatabaseFile', db);
 
-    mrstModule add ad-props compositional deckformat h2-biochem
+    mrstModule add ad-props compositional deckformat 
 
     opt = struct( ...
         'meaningfulLossThreshold', 0.1, ...

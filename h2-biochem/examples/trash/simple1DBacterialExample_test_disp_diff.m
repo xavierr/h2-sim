@@ -16,7 +16,7 @@
 % ===========================================================================
 
 mrstModule add ad-core ad-props deckformat mrst-gui
-mrstModule add compositional h2-biochem
+mrstModule add compositional 
 mrstVerbose off;
 
 %% 1. Setup base compositional model (common geometry, fluids, wells)

@@ -25,7 +25,7 @@ function scenarios = testAllDiffusionEffects(varargin)
 % phreeqcBackend='sequential-h2biochem-phreeqc' run without the coarse-flow
 % split) is intentionally not part of this comparison for now.
 
-    mrstModule add ad-props compositional h2-biochem
+    mrstModule add ad-props compositional 
 
     opt = struct( ...
         'phreeqcDatabaseFile', '', ...

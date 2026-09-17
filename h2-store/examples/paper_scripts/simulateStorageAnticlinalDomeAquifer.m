@@ -26,7 +26,7 @@
 % data is also available and can create data files for varying 
 % salinity conditions.
 
-mrstModule add ad-core ad-blackoil ad-props deckformat mrst-gui vemmech test-suite h2store
+mrstModule add ad-core ad-blackoil ad-props deckformat mrst-gui vemmech test-suite 
 %% Notice on Computational Cost
 warning('ComputationalCost:High', ...
        ['Please be advised that this example takes a long time ', ...

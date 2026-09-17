@@ -27,7 +27,7 @@ classdef SequentialBiochemistryPhreeqcModelStepTest < matlab.unittest.TestCase
 
     methods (TestClassSetup)
         function setupModelAndRunOneStep(testCase)
-            mrstModule add ad-core ad-props compositional deckformat h2-biochem
+            mrstModule add ad-core ad-props compositional deckformat 
             databaseFile = resolveStepTestDatabaseFile();
             testCase.assumeTrue(~isempty(databaseFile) && isIPhreeqcComAvailable(), ...
                 ['A registered IPhreeqcCOM server and an on-disk ', ...
