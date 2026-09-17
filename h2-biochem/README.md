@@ -15,30 +15,22 @@ This module extends MRST's capabilities by integrating a bio-chemistry model wit
 
 ### Optional PHREEQC backends
 
-`setupH2StorageExampleWithSRB_benchmark` supports exactly two PHREEQC
-backends. Both require Windows, a registered `IPhreeqcCOM.Object` (or
-configured `phreeqcComProgId`), and an explicit absolute
-`phreeqcDatabaseFile` path to `PHREEQC_Modified.DAT`.
+`setupH2StorageExampleWithSRB_benchmark` supports exactly two PHREEQC backends. Both require Windows, a registered
+`IPhreeqcCOM.Object` (or configured `phreeqcComProgId`), and an explicit absolute `phreeqcDatabaseFile` path to
+`PHREEQC_Modified.DAT`.
 
-Set `phreeqcBackend='sequential-compositional-phreeqc'` with
-`phreeqcTimestepCoupling=true` to run the post-convergence compositional
-kinetics/chemistry split.
+Set `phreeqcBackend='sequential-compositional-phreeqc'` with `phreeqcTimestepCoupling=true` to run the post-convergence
+compositional kinetics/chemistry split.
 
-The COM split carries separate PHREEQC MET/ACE/SRB biomass
-(`N0=1e9`, `Nmax=1e13` cells/kg water) and disables MRST's implicit microbial
-reaction sources to avoid double counting; aqueous tracer transport (SO4, HS,
-HCO3, Ca, Mg) remains active. `bactDiffusion` and `chemotaxisEffect` are
-rejected for this backend: PHREEQC integrates only local per-cell kinetics
-with no notion of spatial bacterial transport, so `nbact` cannot be diffused
-or chemotaxis-moved independently of the biomass PHREEQC is actually growing.
-Since its reaction source is also zero here, MRST does not assemble `nbact`'s
-mass-balance equation at all for this backend (it would be a pure no-op every
-step); `nbact` is still carried as a state field, and
-`PsiGrowthRate`/`CarbonLimitedGrowthRate`/`BacterialMass` remain available as
-diagnostic-only outputs. It maps the prescribed selected-output schema
-back to tracers, minerals, and EOS inventories before reflashing. This
-sequential coupling is not claimed to exactly reproduce any paper or external
-benchmark.
+The COM split carries separate PHREEQC MET/ACE/SRB biomass (`N0=1e9`, `Nmax=1e13` cells/kg water) and disables MRST's
+implicit microbial reaction sources to avoid double counting; aqueous tracer transport (SO4, HS, HCO3, Ca, Mg) remains
+active. `bactDiffusion` and `chemotaxisEffect` are rejected for this backend: PHREEQC integrates only local per-cell
+kinetics with no notion of spatial bacterial transport, so `nbact` cannot be diffused or chemotaxis-moved independently
+of the biomass PHREEQC is actually growing.  Since its reaction source is also zero here, MRST does not assemble
+`nbact`'s mass-balance equation at all for this backend (it would be a pure no-op every step); `nbact` is still carried
+as a state field, and `PsiGrowthRate`/`CarbonLimitedGrowthRate`/`BacterialMass` remain available as diagnostic-only
+outputs. It maps the prescribed selected-output schema back to tracers, minerals, and EOS inventories before
+reflashing. This sequential coupling is not claimed to exactly reproduce any paper or external benchmark.
 
 Both backends reject a PHREEQC result before updating the state unless H, C, S,
 Ca, Mg, and Fe are conserved in every cell. The returned state records the
