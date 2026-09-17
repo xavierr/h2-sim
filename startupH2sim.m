@@ -24,6 +24,10 @@ for ind = 1 : numel(dirnames)
     addpath(genpath(dirname));
 end
 
+%% Install Phreeqcs
+
+run(fullfile(rootdirname, 'submodules', 'PhreeqcMatlab', 'startup'));
+
 %% Octave requires some extra functionality
 if mrstPlatform('octave')
 
