@@ -76,7 +76,7 @@ classdef MLXnotebookExporter
                 fclose(fid);
             end
 
-            pyfilename = fullfile(battmoDir(), 'Utilities', 'Various', 'setupIpynbForH2sim.py');
+            pyfilename = fullfile(h2simDir(), 'utils', 'setupIpynbForH2sim.py');
 
             pyrunfile([pyfilename ' ' outputfilename]);
             
