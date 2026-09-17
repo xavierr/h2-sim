@@ -2,10 +2,10 @@
 Installation
 ============
 
-The source code of H2sym can be installed using git. In this way, you can easily keep track of the
+The source code of H2sim can be installed using git. In this way, you can easily keep track of the
 last developments.
 
-First, open a terminal and navigate to the directory where you would like to install H2sym. Then, clone the repository
+First, open a terminal and navigate to the directory where you would like to install H2sim. Then, clone the repository
 using the following command, which will include all the dependencies as submodules
 
 .. code-block:: shell
@@ -31,7 +31,7 @@ Check your installation by running this simple example
 Update existing installation
 ============================
 
-In the case where we alread have installed H2sym and you want to update to the latest version. As usual in git, you
+In the case where we alread have installed H2sim and you want to update to the latest version. As usual in git, you
 will do that by running
 
 .. code-block:: shell

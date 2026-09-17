@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bio-Chemistry Module for Hydrogen Storage Simulation &mdash; H2-Sim  documentation</title>
+  <title>Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model &mdash; H2-Sim  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_collapse.css?v=226d88b4" />
@@ -29,8 +29,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="H2-Store: Simulation of hydrogen storage in aquifers" href="store.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="next" title="Notebooks" href="notebooks.html" />
+    <link rel="prev" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" href="store.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,16 +58,16 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Bio-Chemistry Module for Hydrogen Storage Simulation</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="store.html">Hydrogen Storage Simulation in Aquifers using Black-Oil Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#optional-phreeqc-backends">Optional PHREEQC backends</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#biochemical-reaction-model">Biochemical Reaction Model</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="store.html">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
@@ -91,6 +91,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
 </ul>
 
@@ -108,7 +109,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Bio-Chemistry Module for Hydrogen Storage Simulation</li>
+      <li class="breadcrumb-item active">Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/biochem.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -118,17 +119,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="bio-chemistry-module-for-hydrogen-storage-simulation">
-<h1>Bio-Chemistry Module for Hydrogen Storage Simulation<a class="headerlink" href="#bio-chemistry-module-for-hydrogen-storage-simulation" title="Link to this heading"></a></h1>
-<p>A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for
-simulating hydrogen storage in depleted reservoirs with bio-chemical
-reactions and compositional modeling.</p>
+  <section id="hydrogen-storage-simulation-with-bio-chemistry-and-compositional-model">
+<h1>Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model<a class="headerlink" href="#hydrogen-storage-simulation-with-bio-chemistry-and-compositional-model" title="Link to this heading"></a></h1>
+<p>A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for simulating hydrogen storage in
+depleted reservoirs with bio-chemical reactions and compositional modeling.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This module extends MRST’s capabilities by integrating a bio-chemistry
-model with the compositional simulator, specifically designed for
-hydrogen storage applications. It implements the Soreide-Whitson (SW)
-equation of state fitted to experimental data and enables simulation of
+<p>This module extends MRST’s capabilities by integrating a bio-chemistry model with the compositional
+simulator, specifically designed for hydrogen storage applications. It implements the
+Soreide-Whitson (SW) equation of state fitted to experimental data and enables simulation of
 microbial activity affecting hydrogen storage operations.</p>
 </section>
 <section id="key-features">
@@ -145,11 +144,11 @@ activity</p></li>
 </section>
 <section id="optional-phreeqc-backends">
 <h2>Optional PHREEQC backends<a class="headerlink" href="#optional-phreeqc-backends" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">setupH2StorageExampleWithSRB_benchmark</span></code> supports exactly two PHREEQC backends. Both require
+<p>The <code class="docutils literal notranslate"><span class="pre">setupH2StorageExampleWithSRB_benchmark</span></code> supports exactly two PHREEQC backends. Both require
 Windows, a registered <code class="docutils literal notranslate"><span class="pre">IPhreeqcCOM.Object</span></code> (or configured <code class="docutils literal notranslate"><span class="pre">phreeqcComProgId</span></code>), and an explicit
 absolute <code class="docutils literal notranslate"><span class="pre">phreeqcDatabaseFile</span></code> path to <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code>.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-compositional-phreeqc'</span></code> with <code class="docutils literal notranslate"><span class="pre">phreeqcTimestepCoupling=true</span></code> to
-run the post-convergence compositional kinetics/chemistry split.</p>
+<p>In you can set <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-compositional-phreeqc'</span></code> with
+<code class="docutils literal notranslate"><span class="pre">phreeqcTimestepCoupling=true</span></code> to run the post-convergence compositional kinetics/chemistry split.</p>
 <p>The COM split carries separate PHREEQC MET/ACE/SRB biomass (<code class="docutils literal notranslate"><span class="pre">N0=1e9</span></code>, <code class="docutils literal notranslate"><span class="pre">Nmax=1e13</span></code> cells/kg
 water) and disables MRST’s implicit microbial reaction sources to avoid double counting; aqueous
 tracer transport (SO4, HS, HCO3, Ca, Mg) remains active. <code class="docutils literal notranslate"><span class="pre">bactDiffusion</span></code> and <code class="docutils literal notranslate"><span class="pre">chemotaxisEffect</span></code>
@@ -178,9 +177,9 @@ kinetic biomass is outside the reactive-element inventory because its PHREEQC de
 <code class="docutils literal notranslate"><span class="pre">-formula</span> <span class="pre">H</span> <span class="pre">0</span></code> and defines no C, S, Ca, Mg, or Fe storage; MET/ACE/SRB kinetic amounts are
 reaction extents rather than stored products. MRST <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is likewise outside the
 equilibrium-only boundary.</p>
-<p><code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-h2biochem-phreeqc'</span></code> retains MRST’s biochemical sources and adds
-sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and an
-absolute <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code> path, but contains <strong>no</strong> PHREEQC <code class="docutils literal notranslate"><span class="pre">RATES</span></code> or
+<p>the backend <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-h2biochem-phreeqc'</span></code> retains MRST’s biochemical sources and
+adds sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and
+an absolute <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code> path, but contains <strong>no</strong> PHREEQC <code class="docutils literal notranslate"><span class="pre">RATES</span></code> or
 <code class="docutils literal notranslate"><span class="pre">KINETICS</span></code>. MRST’s existing <code class="docutils literal notranslate"><span class="pre">state.nbact</span></code> Monod model remains the sole reaction owner: bacterial
 growth, <code class="docutils literal notranslate"><span class="pre">BactConvertionRate</span></code>, and tracer reaction sources remain active.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">schedule</span><span class="p">,</span><span class="w"> </span><span class="n">state0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setupH2StorageExampleWithSRB_benchmark</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
@@ -215,8 +214,8 @@ Transport During Underground Hydrogen Storage</a></p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="store.html" class="btn btn-neutral float-right" title="H2-Store: Simulation of hydrogen storage in aquifers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="store.html" class="btn btn-neutral float-left" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="notebooks.html" class="btn btn-neutral float-right" title="Notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

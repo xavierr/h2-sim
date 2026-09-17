@@ -27,7 +27,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bio-Chemistry Module for Hydrogen Storage Simulation" href="biochem.html" />
+    <link rel="next" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" href="store.html" />
     <link rel="prev" title="&lt;no title&gt;" href="index.html" /> 
 </head>
 
@@ -56,16 +56,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="biochem.html">Bio-Chemistry Module for Hydrogen Storage Simulation</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="store.html">Hydrogen Storage Simulation in Aquifers using Black-Oil Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biochem.html">Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="biochem.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="biochem.html#key-features">Key Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="biochem.html#optional-phreeqc-backends">Optional PHREEQC backends</a></li>
 <li class="toctree-l2"><a class="reference internal" href="biochem.html#biochemical-reaction-model">Biochemical Reaction Model</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="store.html">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
@@ -89,6 +89,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
 </ul>
 
@@ -118,9 +119,9 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p>The source code of H2sym can be installed using git. In this way, you can easily keep track of the
+<p>The source code of H2sim can be installed using git. In this way, you can easily keep track of the
 last developments.</p>
-<p>First, open a terminal and navigate to the directory where you would like to install H2sym. Then, clone the repository
+<p>First, open a terminal and navigate to the directory where you would like to install H2sim. Then, clone the repository
 using the following command, which will include all the dependencies as submodules</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/xavierr/h2-sim.git
 </pre></div>
@@ -135,7 +136,7 @@ using the following command, which will include all the dependencies as submodul
 </div>
 <section id="update-existing-installation">
 <h2>Update existing installation<a class="headerlink" href="#update-existing-installation" title="Link to this heading"></a></h2>
-<p>In the case where we alread have installed H2sym and you want to update to the latest version. As usual in git, you
+<p>In the case where we alread have installed H2sim and you want to update to the latest version. As usual in git, you
 will do that by running</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
 </pre></div>
@@ -170,7 +171,7 @@ case, you will need to run in addition to the previous command,</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="biochem.html" class="btn btn-neutral float-right" title="Bio-Chemistry Module for Hydrogen Storage Simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="store.html" class="btn btn-neutral float-right" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
