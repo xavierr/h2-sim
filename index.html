@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MRST Bio-Chemistry Module for Hydrogen Storage Simulation &mdash; H2-Sim  documentation</title>
+  <title>&lt;no title&gt; &mdash; H2-Sim  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_collapse.css?v=226d88b4" />
@@ -24,11 +24,10 @@
       <script src="_static/copybutton.js?v=f281be69"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-      <script>window.MathJax = {"loader": {"load": ["[tex]/mhchem"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "packages": {"[+]": ["mhchem"]}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,23 +49,26 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">MRST Bio-Chemistry Module for Hydrogen Storage Simulation</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a><ul>
-<li><a class="reference internal" href="#key-features">Key Features</a></li>
-<li><a class="reference internal" href="#optional-phreeqc-backends">Optional PHREEQC backends</a></li>
-<li><a class="reference internal" href="#biochemical-reaction-model">Biochemical Reaction Model</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biochem.html">Bio-Chemistry Module for Hydrogen Storage Simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biochem.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biochem.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biochem.html#optional-phreeqc-backends">Optional PHREEQC backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biochem.html#biochemical-reaction-model">Biochemical Reaction Model</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="store.html">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -81,7 +83,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">MRST Bio-Chemistry Module for Hydrogen Storage Simulation</li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,124 +95,13 @@
              
   <div class="toctree-wrapper compound">
 </div>
-<section id="mrst-bio-chemistry-module-for-hydrogen-storage-simulation">
-<h1>MRST Bio-Chemistry Module for Hydrogen Storage Simulation<a class="headerlink" href="#mrst-bio-chemistry-module-for-hydrogen-storage-simulation" title="Link to this heading"></a></h1>
-<p>changement</p>
-<p>A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for
-simulating hydrogen storage in depleted reservoirs with bio-chemical
-reactions and compositional modeling.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This module extends MRST’s capabilities by integrating a bio-chemistry
-model with the compositional simulator, specifically designed for
-hydrogen storage applications. It implements the Soreide-Whitson (SW)
-equation of state fitted to experimental data and enables simulation of
-microbial activity affecting hydrogen storage operations.</p>
-<section id="key-features">
-<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><strong>Compositional Modeling</strong>: Full compositional simulation for
-H₂O-H₂-CO₂-CH₄-N₂ mixtures</p></li>
-<li><p><strong>Bio-Chemistry Integration</strong>: Microbial growth and methanogenesis
-reactions</p></li>
-<li><p><strong>Equation of State</strong>: Soreide-Whitson EoS fitted to experimental data</p></li>
-<li><p><strong>Bacterial Effects</strong>: Simulation of hydrogen loss due to microbial
-activity</p></li>
-</ul>
-</section>
-<section id="optional-phreeqc-backends">
-<h3>Optional PHREEQC backends<a class="headerlink" href="#optional-phreeqc-backends" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">setupH2StorageExampleWithSRB_benchmark</span></code> supports exactly two PHREEQC backends. Both require
-Windows, a registered <code class="docutils literal notranslate"><span class="pre">IPhreeqcCOM.Object</span></code> (or configured <code class="docutils literal notranslate"><span class="pre">phreeqcComProgId</span></code>), and an explicit
-absolute <code class="docutils literal notranslate"><span class="pre">phreeqcDatabaseFile</span></code> path to <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code>.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-compositional-phreeqc'</span></code> with <code class="docutils literal notranslate"><span class="pre">phreeqcTimestepCoupling=true</span></code> to
-run the post-convergence compositional kinetics/chemistry split.</p>
-<p>The COM split carries separate PHREEQC MET/ACE/SRB biomass (<code class="docutils literal notranslate"><span class="pre">N0=1e9</span></code>, <code class="docutils literal notranslate"><span class="pre">Nmax=1e13</span></code> cells/kg
-water) and disables MRST’s implicit microbial reaction sources to avoid double counting; aqueous
-tracer transport (SO4, HS, HCO3, Ca, Mg) remains active. <code class="docutils literal notranslate"><span class="pre">bactDiffusion</span></code> and <code class="docutils literal notranslate"><span class="pre">chemotaxisEffect</span></code>
-are rejected for this backend: PHREEQC integrates only local per-cell kinetics with no notion of
-spatial bacterial transport, so <code class="docutils literal notranslate"><span class="pre">nbact</span></code> cannot be diffused or chemotaxis-moved independently of
-the biomass PHREEQC is actually growing. Since its reaction source is also zero here, MRST does not
-assemble <code class="docutils literal notranslate"><span class="pre">nbact</span></code>’s mass-balance equation at all for this backend (it would be a pure no-op every
-step); <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is still carried as a state field, and
-<code class="docutils literal notranslate"><span class="pre">PsiGrowthRate</span></code>/<code class="docutils literal notranslate"><span class="pre">CarbonLimitedGrowthRate</span></code>/<code class="docutils literal notranslate"><span class="pre">BacterialMass</span></code> remain available as diagnostic-only
-outputs. It maps the prescribed selected-output schema back to tracers, minerals, and EOS
-inventories before reflashing. This sequential coupling is not claimed to exactly reproduce any
-paper or external benchmark.</p>
-<p>Both backends reject a PHREEQC result before updating the state unless H, C, S, Ca, Mg, and Fe are
-conserved in every cell. The returned state records the <code class="docutils literal notranslate"><span class="pre">nc</span></code>-by-6 diagnostics
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceInput</span></code>, <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceOutput</span></code>,
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceAbsoluteResidual</span></code>, <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceNormalizedResidual</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalancePass</span></code>; column names are in <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceElements</span></code>. Configure
-scalar or six-element tolerances with <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceAbsoluteTolerance</span></code> (default <code class="docutils literal notranslate"><span class="pre">1e-7</span></code>
-mol) and <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceRelativeTolerance</span></code> (default <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>) in
-<code class="docutils literal notranslate"><span class="pre">phreeqcCouplingOptions</span></code>.</p>
-<p>The audit covers aqueous analytical totals (including the separate acetate element), EOS
-H2/CO2/CH4/H2S, and all configured equilibrium minerals. Hydrogen uses PHREEQC’s system inventory
-with the fixed initial 1 kg solvent-water baseline removed, avoiding subtraction of cell-scale
-solvent hydrogen while retaining reaction- and hydrate-water changes. The compositional backend’s
-kinetic biomass is outside the reactive-element inventory because its PHREEQC definition has
-<code class="docutils literal notranslate"><span class="pre">-formula</span> <span class="pre">H</span> <span class="pre">0</span></code> and defines no C, S, Ca, Mg, or Fe storage; MET/ACE/SRB kinetic amounts are
-reaction extents rather than stored products. MRST <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is likewise outside the
-equilibrium-only boundary.</p>
-<p><code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-h2biochem-phreeqc'</span></code> retains MRST’s biochemical sources and adds
-sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and an
-absolute <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code> path, but contains <strong>no</strong> PHREEQC <code class="docutils literal notranslate"><span class="pre">RATES</span></code> or
-<code class="docutils literal notranslate"><span class="pre">KINETICS</span></code>. MRST’s existing <code class="docutils literal notranslate"><span class="pre">state.nbact</span></code> Monod model remains the sole reaction owner: bacterial
-growth, <code class="docutils literal notranslate"><span class="pre">BactConvertionRate</span></code>, and tracer reaction sources remain active.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">schedule</span><span class="p">,</span><span class="w"> </span><span class="n">state0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setupH2StorageExampleWithSRB_benchmark</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcBackend&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;sequential-h2biochem-phreeqc&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcTimestepCoupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcDatabaseFile&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;C:\PHREEQC\database\PHREEQC_Modified.DAT&#39;</span><span class="p">);</span>
-<span class="p">[</span><span class="n">wellSols</span><span class="p">,</span><span class="w"> </span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">report</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">simulateSequentialH2BiochemPhreeqc</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="n">state0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">schedule</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Run this backend with <code class="docutils literal notranslate"><span class="pre">simulateSequentialH2BiochemPhreeqc</span></code>, rather than directly with
-<code class="docutils literal notranslate"><span class="pre">simulateScheduleAD</span></code>. For every nominal schedule timestep, the wrapper repeats the MRST solve from
-the fixed timestep-start state, then equilibrates the already-reacted full component, tracer, gas,
-and mineral inventories in PHREEQC. The relaxed preceding PHREEQC pH, DIC/CO2, and sulfate snapshot
-is supplied only to MRST’s Monod kinetic substrate evaluation; it is not an MRST nonlinear initial
-guess or an accumulation state. Iteration stops only when that chemistry feedback and the
-MRST-reported reaction extent (<code class="docutils literal notranslate"><span class="pre">h2ConsumptionRate</span> <span class="pre">*</span> <span class="pre">dt</span></code>) meet configured tolerances, otherwise it
-raises a nonconvergence error. It is therefore a same-timestep outer Picard scheme, not a lagged
-post-step chemistry split.</p>
-</section>
-<section id="biochemical-reaction-model">
-<h3>Biochemical Reaction Model<a class="headerlink" href="#biochemical-reaction-model" title="Link to this heading"></a></h3>
-<p>The module simulates the methanogenesis reaction:</p>
-<div class="math notranslate nohighlight">
-\[4\text{H}_2 + \text{CO}_2 \longrightarrow \text{CH}_4 + 2\text{H}_2\text{O} + \text{energy}\]</div>
-<p>For detailed methodology and validation, see our publication: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0360319925039473">Numerical Modeling of Bio-Reactive
-Transport During Underground Hydrogen Storage</a></p>
-</section>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<section id="prerequisites">
-<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><strong>MATLAB</strong>: Version R2021a or newer</p></li>
-<li><p><strong>MRST</strong>: MATLAB Reservoir Simulation Toolbox (2023b or newer)</p></li>
-<li><p><strong>Required MRST Modules</strong>:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">compositional</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ad-blackoil</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ad-core</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ad-props</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">h2store</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">biochemistry</span></code></p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

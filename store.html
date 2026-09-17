@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; H2-Sim  documentation</title>
+  <title>H2-Store: Simulation of hydrogen storage in aquifers &mdash; H2-Sim  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx_collapse.css?v=226d88b4" />
@@ -24,8 +25,10 @@
       <script src="_static/design-tabs.js?v=f930bc37"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Funding" href="funding.html" />
+    <link rel="prev" title="Bio-Chemistry Module for Hydrogen Storage Simulation" href="biochem.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,7 +50,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisites">Prerequisites</a></li>
 </ul>
@@ -59,9 +62,9 @@
 <li class="toctree-l2"><a class="reference internal" href="biochem.html#biochemical-reaction-model">Biochemical Reaction Model</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="store.html">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">H2-Store: Simulation of hydrogen storage in aquifers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
@@ -81,8 +84,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active">H2-Store: Simulation of hydrogen storage in aquifers</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/store.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -90,17 +94,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
+  <section id="h2-store-simulation-of-hydrogen-storage-in-aquifers">
+<h1>H2-Store: Simulation of hydrogen storage in aquifers<a class="headerlink" href="#h2-store-simulation-of-hydrogen-storage-in-aquifers" title="Link to this heading"></a></h1>
+<p>This module provides simulation tools for modeling a hydrogen (H₂) and
+brine mixture within the <strong>ad-blackoil</strong> module in the <strong>MATLAB Reservoir
+Simulation Toolbox (MRST)</strong>.</p>
+<p>Our module includes tools for implementing the <strong>Redlich-Kwong</strong> (<strong>RK</strong>)
+equation of state (EoS) and generating tabulated PVT data for H₂-brine
+systems. Additionally, it provides solubility tables derived from
+<strong>ePC-Saft</strong> and <strong>Henry’s law</strong> EoS for precise phase behavior
+calculations in hydrogen storage simulations.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This module is developed to simulate the phase behavior and
+thermodynamic properties of hydrogen stored in saline aquifers, with
+specific consideration of temperature, pressure, and salinity effects on
+hydrogen solubility and fluid properties.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Implementation of RK Equation of State</strong>: The module includes an
+implementation of the Redlich-Kwong (RK) EoS for H₂-brine mixtures,
+allowing for quick thermodynamic calculations that capture real gas
+behavior and temperature effects.</p></li>
+<li><p><strong>Scripts for tabulating PVT Data for blackoil simulators</strong>:
+Precomputed PVT tables facilitate efficient simulation of H₂-brine
+mixtures in MRST’s ad-blackoil module. The resulting tables are also
+suitable for other blackoil simulators.</p></li>
+<li><p><strong>Solubility tables</strong>: Estimate solubility from both ePC-Saft (data)
+and Henry-Setschnow correlation.</p></li>
+<li><p><strong>Correlations</strong> for estimating the properties of water and H₂
+mixtures for different pressure, temperature and salinity.</p></li>
+</ul>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="biochem.html" class="btn btn-neutral float-left" title="Bio-Chemistry Module for Hydrogen Storage Simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="funding.html" class="btn btn-neutral float-right" title="Funding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
