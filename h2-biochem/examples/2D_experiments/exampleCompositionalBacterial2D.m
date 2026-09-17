@@ -33,7 +33,7 @@ warning('ComputationalCost:High', ...
     ['This is a 5-cycle injection example; consider reducing cycles for faster runs.']);
 
 %% Set up black-oil model and schedule
-[~, ~, state0Bo, modelBo, scheduleBo, ~] = modelForSimple2DAquifer(deck,'numcycles',10);
+[~, ~, state0Bo, modelBo, scheduleBo, ~] = modelForSimple2DAquifer(deck,'numcycles',1);
 
 %% Convert black-oil to compositional model
 model = convertBlackOilModelToCompositionalModel(modelBo);
