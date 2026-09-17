@@ -16,7 +16,8 @@ rootdirname = fileparts(mfilename('fullpath'));
 run(fullfile(rootdirname, 'mrst', 'startup'));
 
 dirnames = {'h2-biochem', ...
-            'h2-store'};
+            'h2-store', ...
+            'utils'};
 
 for ind = 1 : numel(dirnames)
     dirname = fullfile(rootdirname, dirnames{ind});
@@ -57,7 +58,7 @@ if mrstPlatform('octave')
 
 end
 
-mrstModule add compositional ad-blackoil ad-core ad-props
+mrstModule add compositional ad-blackoil ad-core ad-props deckformat
 
 end
 
