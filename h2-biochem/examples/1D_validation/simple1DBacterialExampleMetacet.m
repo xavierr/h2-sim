@@ -1,5 +1,5 @@
 %% 1D Compositional Simulation with Bio-Clogging (MRST-style, release-ready)
-% ===========================================================================
+%
 % This MRST example demonstrates a 1D two-phase compositional simulation
 % with and without bio-clogging effects in a porous medium. The simulation
 % includes:
@@ -18,13 +18,14 @@
 % bio-chemical extensions, and the impact of microbial activity on flow.
 %
 % Reference: https://www.sciencedirect.com/science/article/pii/S0360319925039473
-% ===========================================================================
 
 mrstModule add ad-core ad-props deckformat mrst-gui
 mrstModule add compositional 
 mrstVerbose off;
 
 %% Setup base compositional model
+%
+
 [~, model, schedule, ~] = setupSimpleCompositionalExample(false);
 %% Mimic simple well effects by altering boundary cells
 % Increase porosity in boundary cells.
