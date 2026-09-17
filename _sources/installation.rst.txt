@@ -34,13 +34,15 @@ case, you will need to run in addition to the previous command,
 
    git submodule update --recursive
 
-Comments
-========
+Dependencies
+============
 
-This package is built upon
+The depencies are included as submodules so that no special installation for those is needed.
+
+The package is built upon
 
 - **MATLAB**: Version R2021a or newer
-- **MRST**: MATLAB Reservoir Simulation Toolbox (2023b or newer)
+- **MRST**: MATLAB Reservoir Simulation Toolbox (2023b or newer), see `MRST`_
 - **MRST Modules**:
 
   - ``compositional``
