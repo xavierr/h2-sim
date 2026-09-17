@@ -12,7 +12,18 @@ using the following command, which will include all the dependencies as submodul
 
    git clone --recurse-submodules https://github.com/xavierr/h2-sim.git
 
-Then, run :code:`startupH2sim.m` 
+Then, open matlab and run
+
+.. code-block:: matlab
+                
+   startupH2sim
+
+Check your installation by running this simple example
+
+.. code-block:: matlab
+                
+   simple1DBacterialExampleMetacet
+
 
 .. _MRST: https://www.sintef.no/Projectweb/MRST/
 
