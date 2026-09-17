@@ -74,7 +74,7 @@ extensions = ['nbsphinx',
               'sphinx_design',
               'sphinx_copybutton']
 
-bibtex_bibfiles = ['refs.bib']
+bibtex_bibfiles = ['references.bib']
 
 mathjax3_config = {
   'loader': {'load': ['[tex]/mhchem']},

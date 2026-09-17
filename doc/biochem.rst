@@ -1,18 +1,16 @@
-====================================================
-Bio-Chemistry Module for Hydrogen Storage Simulation
-====================================================
+======================================================================
+Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model
+======================================================================
 
-A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for
-simulating hydrogen storage in depleted reservoirs with bio-chemical
-reactions and compositional modeling.
+A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for simulating hydrogen storage in
+depleted reservoirs with bio-chemical reactions and compositional modeling.
 
 Overview
 ========
 
-This module extends MRST's capabilities by integrating a bio-chemistry
-model with the compositional simulator, specifically designed for
-hydrogen storage applications. It implements the Soreide-Whitson (SW)
-equation of state fitted to experimental data and enables simulation of
+This module extends MRST's capabilities by integrating a bio-chemistry model with the compositional
+simulator, specifically designed for hydrogen storage applications. It implements the
+Soreide-Whitson (SW) equation of state fitted to experimental data and enables simulation of
 microbial activity affecting hydrogen storage operations.
 
 Key Features
@@ -29,13 +27,12 @@ Key Features
 Optional PHREEQC backends
 =========================
 
-
-``setupH2StorageExampleWithSRB_benchmark`` supports exactly two PHREEQC backends. Both require
+The ``setupH2StorageExampleWithSRB_benchmark`` supports exactly two PHREEQC backends. Both require
 Windows, a registered ``IPhreeqcCOM.Object`` (or configured ``phreeqcComProgId``), and an explicit
 absolute ``phreeqcDatabaseFile`` path to ``PHREEQC_Modified.DAT``.
 
-Set ``phreeqcBackend='sequential-compositional-phreeqc'`` with ``phreeqcTimestepCoupling=true`` to
-run the post-convergence compositional kinetics/chemistry split.
+In you can set ``phreeqcBackend='sequential-compositional-phreeqc'`` with
+``phreeqcTimestepCoupling=true`` to run the post-convergence compositional kinetics/chemistry split.
 
 The COM split carries separate PHREEQC MET/ACE/SRB biomass (``N0=1e9``, ``Nmax=1e13`` cells/kg
 water) and disables MRST's implicit microbial reaction sources to avoid double counting; aqueous
@@ -68,9 +65,9 @@ kinetic biomass is outside the reactive-element inventory because its PHREEQC de
 reaction extents rather than stored products. MRST ``nbact`` is likewise outside the
 equilibrium-only boundary.
 
-``phreeqcBackend='sequential-h2biochem-phreeqc'`` retains MRST's biochemical sources and adds
-sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and an
-absolute ``PHREEQC_Modified.DAT`` path, but contains **no** PHREEQC ``RATES`` or
+the backend ``phreeqcBackend='sequential-h2biochem-phreeqc'`` retains MRST's biochemical sources and
+adds sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and
+an absolute ``PHREEQC_Modified.DAT`` path, but contains **no** PHREEQC ``RATES`` or
 ``KINETICS``. MRST's existing ``state.nbact`` Monod model remains the sole reaction owner: bacterial
 growth, ``BactConvertionRate``, and tracer reaction sources remain active.
 
@@ -95,7 +92,6 @@ post-step chemistry split.
 
 Biochemical Reaction Model
 ==========================
-
 
 The module simulates the methanogenesis reaction:
 
