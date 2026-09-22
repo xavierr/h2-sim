@@ -26,10 +26,15 @@ function scenarios = runThreeBackendComparison(varargin)
 % split) is intentionally not part of this comparison for now.
 %
 % EXAMPLE:
-%   db = '\\wsl.localhost\Ubuntu\path\to\PHREEQC_Modified.DAT';
+%   % PHREEQC_Modified.DAT is bundled at h2-biochem/database/ and is found
+%   % automatically via which() once startupH2sim has run, so no path is
+%   % required by default:
+%   scenarios = runThreeBackendComparison();
+%   scenarios = runThreeBackendComparison('referenceUseSoreideWhitsonEOS', true);
+%
+%   % To use a different database, pass its absolute path explicitly:
+%   db = '/absolute/path/to/PHREEQC_Modified.DAT';
 %   scenarios = runThreeBackendComparison('phreeqcDatabaseFile', db);
-%   scenarios = runThreeBackendComparison('phreeqcDatabaseFile', db, ...
-%       'referenceUseSoreideWhitsonEOS', true);
 
     mrstModule add ad-props compositional deckformat 
 

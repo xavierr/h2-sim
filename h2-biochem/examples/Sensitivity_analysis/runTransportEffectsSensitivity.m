@@ -22,8 +22,12 @@ function results = runTransportEffectsSensitivity(varargin)
 %   % Original backend only (no PHREEQC needed):
 %   results = runTransportEffectsSensitivity('backends', {'original'});
 %
-%   % Both backends:
-%   db = '/path/to/PHREEQC_Modified.DAT';
+%   % Both backends (PHREEQC_Modified.DAT is bundled at h2-biochem/database/
+%   % and found automatically via which() once startupH2sim has run):
+%   results = runTransportEffectsSensitivity();
+%
+%   % To use a different database, pass its absolute path explicitly:
+%   db = '/absolute/path/to/PHREEQC_Modified.DAT';
 %   results = runTransportEffectsSensitivity('phreeqcDatabaseFile', db);
 
     mrstModule add ad-props compositional deckformat 
