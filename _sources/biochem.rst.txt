@@ -29,7 +29,9 @@ Optional PHREEQC backends
 
 The ``setupH2StorageExampleWithSRB_benchmark`` supports exactly two PHREEQC backends. Both require
 Windows, a registered ``IPhreeqcCOM.Object`` (or configured ``phreeqcComProgId``), and an explicit
-absolute ``phreeqcDatabaseFile`` path to ``PHREEQC_Modified.DAT``.
+absolute ``phreeqcDatabaseFile`` path to ``PHREEQC_Modified.DAT``. The database is bundled at
+``h2-biochem/database/PHREEQC_Modified.DAT``; since that folder is on the MATLAB path after running
+``startupH2sim``, ``which('PHREEQC_Modified.DAT')`` resolves it automatically.
 
 In you can set ``phreeqcBackend='sequential-compositional-phreeqc'`` with
 ``phreeqcTimestepCoupling=true`` to run the post-convergence compositional kinetics/chemistry split.
@@ -76,7 +78,7 @@ growth, ``BactConvertionRate``, and tracer reaction sources remain active.
    [~, model, schedule, state0] = setupH2StorageExampleWithSRB_benchmark( ...
        'phreeqcBackend', 'sequential-h2biochem-phreeqc', ...
        'phreeqcTimestepCoupling', true, ...
-       'phreeqcDatabaseFile', 'C:\PHREEQC\database\PHREEQC_Modified.DAT');
+       'phreeqcDatabaseFile', which('PHREEQC_Modified.DAT'));
    [wellSols, states, report] = simulateSequentialH2BiochemPhreeqc( ...
        state0, model, schedule);
 
