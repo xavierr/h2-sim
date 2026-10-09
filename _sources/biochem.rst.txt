@@ -1,107 +1,121 @@
-======================================================================
-Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model
-======================================================================
+Hydrogen storage in depleted gas reservoirs
+===========================================
 
-A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for simulating hydrogen storage in
-depleted reservoirs with bio-chemical reactions and compositional modeling.
+Compositional flow with bacterial effects · ``h2-biochem``
 
-Overview
-========
+The biochemistry module extends MRST compositional flow with microbial
+populations, reaction pathways, and aqueous tracer transport. This model
+family supports studying injected hydrogen mixed with residual reservoir
+gases. The selected 2D example uses the existing three-reaction reservoir case
+with residual methane and five storage cycles. A one-dimensional notebook
+remains available as an introduction.
 
-This module extends MRST's capabilities by integrating a bio-chemistry model with the compositional
-simulator, specifically designed for hydrogen storage applications. It implements the
-Soreide-Whitson (SW) equation of state fitted to experimental data and enables simulation of
-microbial activity affecting hydrogen storage operations.
+What the models include
+-----------------------
 
-Key Features
-============
+* Soreide–Whitson gas–liquid partitioning.
+* Methanogenesis and acetogenesis in the selected introductory notebook.
+* Sulfate reduction in the corresponding multi-reaction setups.
+* Optional molecular diffusion, dispersion, bacterial diffusion, chemotaxis,
+  carbonate feedback, and bioclogging where supported by the setup.
 
-- **Compositional Modeling**: Full compositional simulation for
-  H₂O-H₂-CO₂-CH₄-N₂ mixtures
-- **Bio-Chemistry Integration**: Microbial growth and methanogenesis
-  reactions
-- **Equation of State**: Soreide-Whitson EoS fitted to experimental data
-- **Bacterial Effects**: Simulation of hydrogen loss due to microbial
-  activity
+The component mixture depends on the example. The multi-reaction setups
+include water, hydrogen, carbon dioxide, methane, hydrogen sulfide, and acetate.
 
-Optional PHREEQC backends
-=========================
-
-The ``setupH2StorageExampleWithSRB_benchmark`` supports exactly two PHREEQC backends. Both require
-Windows, a registered ``IPhreeqcCOM.Object`` (or configured ``phreeqcComProgId``), and an explicit
-absolute ``phreeqcDatabaseFile`` path to ``PHREEQC_Modified.DAT``. The database is bundled at
-``h2-biochem/database/PHREEQC_Modified.DAT``; since that folder is on the MATLAB path after running
-``startupH2sim``, ``which('PHREEQC_Modified.DAT')`` resolves it automatically.
-
-In you can set ``phreeqcBackend='sequential-compositional-phreeqc'`` with
-``phreeqcTimestepCoupling=true`` to run the post-convergence compositional kinetics/chemistry split.
-
-The COM split carries separate PHREEQC MET/ACE/SRB biomass (``N0=1e9``, ``Nmax=1e13`` cells/kg
-water) and disables MRST's implicit microbial reaction sources to avoid double counting; aqueous
-tracer transport (SO4, HS, HCO3, Ca, Mg) remains active. ``bactDiffusion`` and ``chemotaxisEffect``
-are rejected for this backend: PHREEQC integrates only local per-cell kinetics with no notion of
-spatial bacterial transport, so ``nbact`` cannot be diffused or chemotaxis-moved independently of
-the biomass PHREEQC is actually growing. Since its reaction source is also zero here, MRST does not
-assemble ``nbact``'s mass-balance equation at all for this backend (it would be a pure no-op every
-step); ``nbact`` is still carried as a state field, and
-``PsiGrowthRate``/``CarbonLimitedGrowthRate``/``BacterialMass`` remain available as diagnostic-only
-outputs. It maps the prescribed selected-output schema back to tracers, minerals, and EOS
-inventories before reflashing. This sequential coupling is not claimed to exactly reproduce any
-paper or external benchmark.
-
-Both backends reject a PHREEQC result before updating the state unless H, C, S, Ca, Mg, and Fe are
-conserved in every cell. The returned state records the ``nc``-by-6 diagnostics
-``phreeqcElementBalanceInput``, ``phreeqcElementBalanceOutput``,
-``phreeqcElementBalanceAbsoluteResidual``, ``phreeqcElementBalanceNormalizedResidual``, and
-``phreeqcElementBalancePass``; column names are in ``phreeqcElementBalanceElements``. Configure
-scalar or six-element tolerances with ``phreeqcElementBalanceAbsoluteTolerance`` (default ``1e-7``
-mol) and ``phreeqcElementBalanceRelativeTolerance`` (default ``1e-8``) in
-``phreeqcCouplingOptions``.
-
-The audit covers aqueous analytical totals (including the separate acetate element), EOS
-H2/CO2/CH4/H2S, and all configured equilibrium minerals. Hydrogen uses PHREEQC's system inventory
-with the fixed initial 1 kg solvent-water baseline removed, avoiding subtraction of cell-scale
-solvent hydrogen while retaining reaction- and hydrate-water changes. The compositional backend's
-kinetic biomass is outside the reactive-element inventory because its PHREEQC definition has
-``-formula H 0`` and defines no C, S, Ca, Mg, or Fe storage; MET/ACE/SRB kinetic amounts are
-reaction extents rather than stored products. MRST ``nbact`` is likewise outside the
-equilibrium-only boundary.
-
-the backend ``phreeqcBackend='sequential-h2biochem-phreeqc'`` retains MRST's biochemical sources and
-adds sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and
-an absolute ``PHREEQC_Modified.DAT`` path, but contains **no** PHREEQC ``RATES`` or
-``KINETICS``. MRST's existing ``state.nbact`` Monod model remains the sole reaction owner: bacterial
-growth, ``BactConvertionRate``, and tracer reaction sources remain active.
+Five-cycle 2D example
+---------------------
 
 .. code-block:: matlab
 
-   [~, model, schedule, state0] = setupH2StorageExampleWithSRB_benchmark( ...
-       'phreeqcBackend', 'sequential-h2biochem-phreeqc', ...
-       'phreeqcTimestepCoupling', true, ...
-       'phreeqcDatabaseFile', which('PHREEQC_Modified.DAT'));
-   [wellSols, states, report] = simulateSequentialH2BiochemPhreeqc( ...
-       state0, model, schedule);
+   startupH2sim
+   results = exampleCompositionalBacterial2DThreeReactions( ...
+       'numCycles', 5, 'scenarios', {'bacterial','abiotic'}, ...
+       'molecularDiffusion', false, 'molecularDispersion', false);
 
-Run this backend with ``simulateSequentialH2BiochemPhreeqc``, rather than directly with
-``simulateScheduleAD``. For every nominal schedule timestep, the wrapper repeats the MRST solve from
-the fixed timestep-start state, then equilibrates the already-reacted full component, tracer, gas,
-and mineral inventories in PHREEQC. The relaxed preceding PHREEQC pH, DIC/CO2, and sulfate snapshot
-is supplied only to MRST's Monod kinetic substrate evaluation; it is not an MRST nonlinear initial
-guess or an accumulation state. Iteration stops only when that chemistry feedback and the
-MRST-reported reaction extent (``h2ConsumptionRate * dt``) meet configured tolerances, otherwise it
-raises a nonconvergence error. It is therefore a same-timestep outer Picard scheme, not a lagged
-post-step chemistry split.
+This uses the original geometry, layered rock, 0.5 m grid spacing, residual
+methane, and default MET/ACE/SRB kinetic parameters. The selected comparison
+disables additional transport and clogging effects. It uses MRST-owned
+kinetics and requires neither PHREEQC nor Parallel Computing Toolbox.
+Accepted states, wells, reports, and full setups are saved for replotting.
+For this larger case, the optional AMGCL solver retains the compositional,
+bacterial, and aqueous-tracer cell unknowns together. Its native thread count
+is configurable through ``setupOptimizedLinearSolver``. See :doc:`installation`.
 
-Biochemical Reaction Model
-==========================
+.. button-ref:: notebooks/bacterial_storage_2d
+   :color: primary
 
-The module simulates the methanogenesis reaction:
+   Open the 2D bacterial storage notebook →
+
+.. figure:: _static/examples/compositional_2d_well_logs_verified.png
+   :alt: Five injection, idle, and withdrawal cycles compared with and without bacterial reactions.
+   :width: 100%
+
+   H₂, CO₂, and CH₄ component mass rates and bottom-hole pressure for the
+   bacterial and abiotic runs. Positive component rates denote injection;
+   negative rates denote production. These logs use the summed well
+   component fluxes rather than local cell compositions. Closed-well rates
+   are zero; BHP is shown only while the well is active, because saved
+   shut-in well records retain the preceding active-step values.
+
+Hydrogen consumption by three microbial reactions
+--------------------------------------------------
+
+The saved cumulative reaction diagnostics separate methanogenesis (MET),
+acetogenesis (ACE), and sulfate reduction (SRB). For each reaction we plot
+consumed hydrogen as a percentage of cumulative hydrogen injected up to
+that time:
 
 .. math::
 
-   4\text{H}_2 + \text{CO}_2 \longrightarrow \text{CH}_4 + 2\text{H}_2\text{O} + \text{energy}
+   L_r(t)=100\,\frac{\sum_c N^{\mathrm{consumed}}_{\mathrm{H_2},c,r}(t)}
+   {N^{\mathrm{injected}}_{\mathrm{H_2}}(t)}.
 
-For detailed methodology and validation, see our publication: `Numerical Modeling of Bio-Reactive
-Transport During Underground Hydrogen Storage
-<https://www.sciencedirect.com/science/article/pii/S0360319925039473>`_
+The index :math:`c` denotes a grid cell and :math:`r` a reaction. The
+numerator comes from the converged reaction source terms; the denominator
+integrates positive H₂ well mass rates and converts them to moles. The total
+curve sums the three contributions. The percentage can fall during injection
+because its denominator increases, even though cumulative consumed moles
+never decrease. Dissolution and unrecovered gas are not counted as microbial
+consumption.
 
+.. figure:: _static/examples/compositional_2d_h2_consumption.png
+   :alt: Percentage of injected hydrogen consumed by methanogenesis, acetogenesis, and sulfate reduction over five cycles.
+   :width: 100%
+
+   Reaction-specific hydrogen consumption and its total over time.
+
+Hydrogen plume and microbial populations
+----------------------------------------
+
+.. figure:: _static/examples/compositional_2d_bacterial_maps.png
+   :alt: Two-dimensional hydrogen gas fraction and the three microbial population fields after build-up and fifth-cycle injection.
+   :width: 100%
+
+   H₂ gas fraction and ``nbact`` for MET, ACE, and SRB after build-up
+   (top) and at the end of fifth-cycle injection (bottom). Each column uses
+   the same color limits at both times. H₂ is masked where gas saturation
+   is below 0.001. ``nbact`` is the model's population variable; the plotted
+   values are not a calibrated cell count per volume.
+
+Introductory notebook
+----------------------
+
+``simple1DBacterialExampleMetacet`` provides a smaller introduction to grid
+construction, wells, microbial populations, and compositional transport.
+
+.. button-ref:: nblinks/simple1DBacterialExampleMetacet
+   :color: secondary
+
+   Open the introductory notebook →
+
+Equation ownership
+------------------
+
+With ``phreeqcTimestepCoupling=false``, microbial source terms are owned by
+MRST. The optional PHREEQC workflows change how chemistry is closed and,
+for the compositional backend, which solver owns microbial kinetics.
+See :doc:`phreeqc` before switching backends.
+
+Inspect ``state.nbact`` for modeled microbial populations and the appropriate
+component/tracer fields for transport. Consumption means hydrogen removed by
+microbial reactions; it is distinct from unrecovered gas during withdrawal.

@@ -1,246 +1,472 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="PHREEQC coupling" href="phreeqc.html"><link rel="prev" title="Hydrogen storage in saline aquifers" href="store.html">
+        <link rel="canonical" href="https://xavierr.github.io/h2-sim/biochem.html">
+        <link rel="prefetch" href="_static/h2sim-logo.svg" as="image">
+
+    <link rel="shortcut icon" href="_static/h2sim-icon.svg"><!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>Hydrogen storage in depleted gas reservoirs - H2sim · Hydrogen storage modeling</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=f618230f" />
+    
+    
 
 
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model &mdash; H2-Sim  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/sphinx_collapse.css?v=226d88b4" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #087f82;
+  --color-brand-content: #087579;
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=f281be69"></script>
-      <script src="_static/design-tabs.js?v=f930bc37"></script>
-      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-      <script>window.MathJax = {"loader": {"load": ["[tex]/mhchem"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "packages": {"[+]": ["mhchem"]}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-    <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Notebooks" href="notebooks.html" />
-    <link rel="prev" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" href="store.html" /> 
-</head>
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6cddd2;
+  --color-brand-content: #6cddd2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #6cddd2;
+  --color-brand-content: #6cddd2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
 
-          
-          
-          <a href="index.html" class="icon icon-home">
-            H2-Sim
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#update-existing-installation">Update existing installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">H2sim · Hydrogen storage modeling</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/h2sim-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Models</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="store.html">Hydrogen storage in saline aquifers</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Hydrogen storage in depleted gas reservoirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phreeqc.html">PHREEQC coupling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Learn and explore</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="thermodynamics.html">Thermodynamics and PVT tabulation</a><input aria-label="Toggle navigation of Thermodynamics and PVT tabulation" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/thermodynamics.html">Hydrogen–brine phase behavior</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="store.html">Hydrogen Storage Simulation in Aquifers using Black-Oil Model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="store.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="store.html#features">Features</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-phreeqc-backends">Optional PHREEQC backends</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#biochemical-reaction-model">Biochemical Reaction Model</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Notebooks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html">1D Compositional Simulation with Bio-Clogging (MRST-style, release-ready)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Setup-base-compositional-model">Setup base compositional model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Mimic-simple-well-effects-by-altering-boundary-cells">Mimic simple well effects by altering boundary cells</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#EOS-setup:-Soreide-Whitson">EOS setup: Soreide-Whitson</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Residual-saturations-and-relperm-adjustments">Residual saturations and relperm adjustments</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Initial-conditions">Initial conditions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Bio-clogging-model">Bio-clogging model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Biochemistry-model-wrapper">Biochemistry model wrapper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Shut-Wells">Shut Wells</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Initialize-state">Initialize state</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-1:-with-bacterial-clogging">Scenario 1: with bacterial clogging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-2:-bacteria-but-no-clogging">Scenario 2: bacteria but no clogging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Scenario-3:-abiotic-(no-bacteria)">Scenario 3: abiotic (no bacteria)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Compare-scenarios">Compare scenarios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Plot-results">Plot results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html#Copyright-notice">Copyright notice</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Selected examples and notebooks</a><input aria-label="Toggle navigation of Selected examples and notebooks" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/blackoil_storage.html">2D hydrogen storage in an aquifer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/bacterial_storage_2d.html">2D compositional storage with three reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nblinks/simple1DBacterialExampleMetacet.html">1D Compositional Simulation with Bio-Clogging (MRST-style, release-ready)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/phreeqc_validation.html">Complete-cycle PHREEQC validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/mineral_comparison.html">Mineral chemistry setup check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/multirate_reactions.html">Separate flow and reaction timescales</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">References</a></li>
+<p class="caption" role="heading"><span class="caption-text">Research &amp; community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications &amp; presentations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">News &amp; events</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Code reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Reference lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="funding.html">Funding</a></li>
 </ul>
 
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">H2-Sim</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/biochem.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="hydrogen-storage-simulation-with-bio-chemistry-and-compositional-model">
-<h1>Hydrogen Storage Simulation with Bio-Chemistry and Compositional Model<a class="headerlink" href="#hydrogen-storage-simulation-with-bio-chemistry-and-compositional-model" title="Link to this heading"></a></h1>
-<p>A comprehensive MATLAB Reservoir Simulation Toolbox (MRST) module for simulating hydrogen storage in
-depleted reservoirs with bio-chemical reactions and compositional modeling.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This module extends MRST’s capabilities by integrating a bio-chemistry model with the compositional
-simulator, specifically designed for hydrogen storage applications. It implements the
-Soreide-Whitson (SW) equation of state fitted to experimental data and enables simulation of
-microbial activity affecting hydrogen storage operations.</p>
-</section>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="https://github.com/xavierr/h2-sim/blob/master/doc/biochem.rst?plain=true" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/xavierr/h2-sim/edit/master/doc/biochem.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="hydrogen-storage-in-depleted-gas-reservoirs">
+<h1>Hydrogen storage in depleted gas reservoirs<a class="headerlink" href="#hydrogen-storage-in-depleted-gas-reservoirs" title="Link to this heading">¶</a></h1>
+<p>Compositional flow with bacterial effects · <code class="docutils literal notranslate"><span class="pre">h2-biochem</span></code></p>
+<p>The biochemistry module extends MRST compositional flow with microbial
+populations, reaction pathways, and aqueous tracer transport. This model
+family supports studying injected hydrogen mixed with residual reservoir
+gases. The selected 2D example uses the existing three-reaction reservoir case
+with residual methane and five storage cycles. A one-dimensional notebook
+remains available as an introduction.</p>
+<section id="what-the-models-include">
+<h2>What the models include<a class="headerlink" href="#what-the-models-include" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Compositional Modeling</strong>: Full compositional simulation for
-H₂O-H₂-CO₂-CH₄-N₂ mixtures</p></li>
-<li><p><strong>Bio-Chemistry Integration</strong>: Microbial growth and methanogenesis
-reactions</p></li>
-<li><p><strong>Equation of State</strong>: Soreide-Whitson EoS fitted to experimental data</p></li>
-<li><p><strong>Bacterial Effects</strong>: Simulation of hydrogen loss due to microbial
-activity</p></li>
+<li><p>Soreide–Whitson gas–liquid partitioning.</p></li>
+<li><p>Methanogenesis and acetogenesis in the selected introductory notebook.</p></li>
+<li><p>Sulfate reduction in the corresponding multi-reaction setups.</p></li>
+<li><p>Optional molecular diffusion, dispersion, bacterial diffusion, chemotaxis,
+carbonate feedback, and bioclogging where supported by the setup.</p></li>
 </ul>
+<p>The component mixture depends on the example. The multi-reaction setups
+include water, hydrogen, carbon dioxide, methane, hydrogen sulfide, and acetate.</p>
 </section>
-<section id="optional-phreeqc-backends">
-<h2>Optional PHREEQC backends<a class="headerlink" href="#optional-phreeqc-backends" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">setupH2StorageExampleWithSRB_benchmark</span></code> supports exactly two PHREEQC backends. Both require
-Windows, a registered <code class="docutils literal notranslate"><span class="pre">IPhreeqcCOM.Object</span></code> (or configured <code class="docutils literal notranslate"><span class="pre">phreeqcComProgId</span></code>), and an explicit
-absolute <code class="docutils literal notranslate"><span class="pre">phreeqcDatabaseFile</span></code> path to <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code>. The database is bundled at
-<code class="docutils literal notranslate"><span class="pre">h2-biochem/database/PHREEQC_Modified.DAT</span></code>; since that folder is on the MATLAB path after running
-<code class="docutils literal notranslate"><span class="pre">startupH2sim</span></code>, <code class="docutils literal notranslate"><span class="pre">which('PHREEQC_Modified.DAT')</span></code> resolves it automatically.</p>
-<p>In you can set <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-compositional-phreeqc'</span></code> with
-<code class="docutils literal notranslate"><span class="pre">phreeqcTimestepCoupling=true</span></code> to run the post-convergence compositional kinetics/chemistry split.</p>
-<p>The COM split carries separate PHREEQC MET/ACE/SRB biomass (<code class="docutils literal notranslate"><span class="pre">N0=1e9</span></code>, <code class="docutils literal notranslate"><span class="pre">Nmax=1e13</span></code> cells/kg
-water) and disables MRST’s implicit microbial reaction sources to avoid double counting; aqueous
-tracer transport (SO4, HS, HCO3, Ca, Mg) remains active. <code class="docutils literal notranslate"><span class="pre">bactDiffusion</span></code> and <code class="docutils literal notranslate"><span class="pre">chemotaxisEffect</span></code>
-are rejected for this backend: PHREEQC integrates only local per-cell kinetics with no notion of
-spatial bacterial transport, so <code class="docutils literal notranslate"><span class="pre">nbact</span></code> cannot be diffused or chemotaxis-moved independently of
-the biomass PHREEQC is actually growing. Since its reaction source is also zero here, MRST does not
-assemble <code class="docutils literal notranslate"><span class="pre">nbact</span></code>’s mass-balance equation at all for this backend (it would be a pure no-op every
-step); <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is still carried as a state field, and
-<code class="docutils literal notranslate"><span class="pre">PsiGrowthRate</span></code>/<code class="docutils literal notranslate"><span class="pre">CarbonLimitedGrowthRate</span></code>/<code class="docutils literal notranslate"><span class="pre">BacterialMass</span></code> remain available as diagnostic-only
-outputs. It maps the prescribed selected-output schema back to tracers, minerals, and EOS
-inventories before reflashing. This sequential coupling is not claimed to exactly reproduce any
-paper or external benchmark.</p>
-<p>Both backends reject a PHREEQC result before updating the state unless H, C, S, Ca, Mg, and Fe are
-conserved in every cell. The returned state records the <code class="docutils literal notranslate"><span class="pre">nc</span></code>-by-6 diagnostics
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceInput</span></code>, <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceOutput</span></code>,
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceAbsoluteResidual</span></code>, <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceNormalizedResidual</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">phreeqcElementBalancePass</span></code>; column names are in <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceElements</span></code>. Configure
-scalar or six-element tolerances with <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceAbsoluteTolerance</span></code> (default <code class="docutils literal notranslate"><span class="pre">1e-7</span></code>
-mol) and <code class="docutils literal notranslate"><span class="pre">phreeqcElementBalanceRelativeTolerance</span></code> (default <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>) in
-<code class="docutils literal notranslate"><span class="pre">phreeqcCouplingOptions</span></code>.</p>
-<p>The audit covers aqueous analytical totals (including the separate acetate element), EOS
-H2/CO2/CH4/H2S, and all configured equilibrium minerals. Hydrogen uses PHREEQC’s system inventory
-with the fixed initial 1 kg solvent-water baseline removed, avoiding subtraction of cell-scale
-solvent hydrogen while retaining reaction- and hydrate-water changes. The compositional backend’s
-kinetic biomass is outside the reactive-element inventory because its PHREEQC definition has
-<code class="docutils literal notranslate"><span class="pre">-formula</span> <span class="pre">H</span> <span class="pre">0</span></code> and defines no C, S, Ca, Mg, or Fe storage; MET/ACE/SRB kinetic amounts are
-reaction extents rather than stored products. MRST <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is likewise outside the
-equilibrium-only boundary.</p>
-<p>the backend <code class="docutils literal notranslate"><span class="pre">phreeqcBackend='sequential-h2biochem-phreeqc'</span></code> retains MRST’s biochemical sources and
-adds sequential PHREEQC equilibrium feedback.  It also requires a registered IPhreeqcCOM server and
-an absolute <code class="docutils literal notranslate"><span class="pre">PHREEQC_Modified.DAT</span></code> path, but contains <strong>no</strong> PHREEQC <code class="docutils literal notranslate"><span class="pre">RATES</span></code> or
-<code class="docutils literal notranslate"><span class="pre">KINETICS</span></code>. MRST’s existing <code class="docutils literal notranslate"><span class="pre">state.nbact</span></code> Monod model remains the sole reaction owner: bacterial
-growth, <code class="docutils literal notranslate"><span class="pre">BactConvertionRate</span></code>, and tracer reaction sources remain active.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">schedule</span><span class="p">,</span><span class="w"> </span><span class="n">state0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">setupH2StorageExampleWithSRB_benchmark</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcBackend&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;sequential-h2biochem-phreeqc&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcTimestepCoupling&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="s">&#39;phreeqcDatabaseFile&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">which</span><span class="p">(</span><span class="s">&#39;PHREEQC_Modified.DAT&#39;</span><span class="p">));</span>
-<span class="p">[</span><span class="n">wellSols</span><span class="p">,</span><span class="w"> </span><span class="n">states</span><span class="p">,</span><span class="w"> </span><span class="n">report</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">simulateSequentialH2BiochemPhreeqc</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
-<span class="w">    </span><span class="n">state0</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">schedule</span><span class="p">);</span>
+<section id="five-cycle-2d-example">
+<h2>Five-cycle 2D example<a class="headerlink" href="#five-cycle-2d-example" title="Link to this heading">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">startupH2sim</span>
+<span class="s">results</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">exampleCompositionalBacterial2DThreeReactions</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">'numCycles'</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">'scenarios'</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">'bacterial'</span><span class="p">,</span><span class="s">'abiotic'</span><span class="p">},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">'molecularDiffusion'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="s">'molecularDispersion'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Run this backend with <code class="docutils literal notranslate"><span class="pre">simulateSequentialH2BiochemPhreeqc</span></code>, rather than directly with
-<code class="docutils literal notranslate"><span class="pre">simulateScheduleAD</span></code>. For every nominal schedule timestep, the wrapper repeats the MRST solve from
-the fixed timestep-start state, then equilibrates the already-reacted full component, tracer, gas,
-and mineral inventories in PHREEQC. The relaxed preceding PHREEQC pH, DIC/CO2, and sulfate snapshot
-is supplied only to MRST’s Monod kinetic substrate evaluation; it is not an MRST nonlinear initial
-guess or an accumulation state. Iteration stops only when that chemistry feedback and the
-MRST-reported reaction extent (<code class="docutils literal notranslate"><span class="pre">h2ConsumptionRate</span> <span class="pre">*</span> <span class="pre">dt</span></code>) meet configured tolerances, otherwise it
-raises a nonconvergence error. It is therefore a same-timestep outer Picard scheme, not a lagged
-post-step chemistry split.</p>
+<p>This uses the original geometry, layered rock, 0.5 m grid spacing, residual
+methane, and default MET/ACE/SRB kinetic parameters. The selected comparison
+disables additional transport and clogging effects. It uses MRST-owned
+kinetics and requires neither PHREEQC nor Parallel Computing Toolbox.
+Accepted states, wells, reports, and full setups are saved for replotting.
+For this larger case, the optional AMGCL solver retains the compositional,
+bacterial, and aqueous-tracer cell unknowns together. Its native thread count
+is configurable through <code class="docutils literal notranslate"><span class="pre">setupOptimizedLinearSolver</span></code>. See <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a>.</p>
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-primary reference internal" href="notebooks/bacterial_storage_2d.html"><span class="doc">Open the 2D bacterial storage notebook →</span></a></p>
+<figure class="align-default" id="id1">
+<img alt="Five injection, idle, and withdrawal cycles compared with and without bacterial reactions." src="_images/compositional_2d_well_logs_verified.png" style="width: 100%;" />
+<figcaption>
+<p><span class="caption-text">H₂, CO₂, and CH₄ component mass rates and bottom-hole pressure for the
+bacterial and abiotic runs. Positive component rates denote injection;
+negative rates denote production. These logs use the summed well
+component fluxes rather than local cell compositions. Closed-well rates
+are zero; BHP is shown only while the well is active, because saved
+shut-in well records retain the preceding active-step values.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
-<section id="biochemical-reaction-model">
-<h2>Biochemical Reaction Model<a class="headerlink" href="#biochemical-reaction-model" title="Link to this heading"></a></h2>
-<p>The module simulates the methanogenesis reaction:</p>
+<section id="hydrogen-consumption-by-three-microbial-reactions">
+<h2>Hydrogen consumption by three microbial reactions<a class="headerlink" href="#hydrogen-consumption-by-three-microbial-reactions" title="Link to this heading">¶</a></h2>
+<p>The saved cumulative reaction diagnostics separate methanogenesis (MET),
+acetogenesis (ACE), and sulfate reduction (SRB). For each reaction we plot
+consumed hydrogen as a percentage of cumulative hydrogen injected up to
+that time:</p>
+<div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[4\text{H}_2 + \text{CO}_2 \longrightarrow \text{CH}_4 + 2\text{H}_2\text{O} + \text{energy}\]</div>
-<p>For detailed methodology and validation, see our publication: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0360319925039473">Numerical Modeling of Bio-Reactive
-Transport During Underground Hydrogen Storage</a></p>
+\[L_r(t)=100\,\frac{\sum_c N^{\mathrm{consumed}}_{\mathrm{H_2},c,r}(t)}
+{N^{\mathrm{injected}}_{\mathrm{H_2}}(t)}.\]</div>
+</div>
+<p>The index <span class="math notranslate nohighlight">\(c\)</span> denotes a grid cell and <span class="math notranslate nohighlight">\(r\)</span> a reaction. The
+numerator comes from the converged reaction source terms; the denominator
+integrates positive H₂ well mass rates and converts them to moles. The total
+curve sums the three contributions. The percentage can fall during injection
+because its denominator increases, even though cumulative consumed moles
+never decrease. Dissolution and unrecovered gas are not counted as microbial
+consumption.</p>
+<figure class="align-default" id="id2">
+<img alt="Percentage of injected hydrogen consumed by methanogenesis, acetogenesis, and sulfate reduction over five cycles." src="_images/compositional_2d_h2_consumption.png" style="width: 100%;" />
+<figcaption>
+<p><span class="caption-text">Reaction-specific hydrogen consumption and its total over time.</span><a class="headerlink" href="#id2" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="hydrogen-plume-and-microbial-populations">
+<h2>Hydrogen plume and microbial populations<a class="headerlink" href="#hydrogen-plume-and-microbial-populations" title="Link to this heading">¶</a></h2>
+<figure class="align-default" id="id3">
+<img alt="Two-dimensional hydrogen gas fraction and the three microbial population fields after build-up and fifth-cycle injection." src="_images/compositional_2d_bacterial_maps.png" style="width: 100%;" />
+<figcaption>
+<p><span class="caption-text">H₂ gas fraction and <code class="docutils literal notranslate"><span class="pre">nbact</span></code> for MET, ACE, and SRB after build-up
+(top) and at the end of fifth-cycle injection (bottom). Each column uses
+the same color limits at both times. H₂ is masked where gas saturation
+is below 0.001. <code class="docutils literal notranslate"><span class="pre">nbact</span></code> is the model’s population variable; the plotted
+values are not a calibrated cell count per volume.</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="introductory-notebook">
+<h2>Introductory notebook<a class="headerlink" href="#introductory-notebook" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">simple1DBacterialExampleMetacet</span></code> provides a smaller introduction to grid
+construction, wells, microbial populations, and compositional transport.</p>
+<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary reference internal" href="nblinks/simple1DBacterialExampleMetacet.html"><span class="doc">Open the introductory notebook →</span></a></p>
+</section>
+<section id="equation-ownership">
+<h2>Equation ownership<a class="headerlink" href="#equation-ownership" title="Link to this heading">¶</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">phreeqcTimestepCoupling=false</span></code>, microbial source terms are owned by
+MRST. The optional PHREEQC workflows change how chemistry is closed and,
+for the compositional backend, which solver owns microbial kinetics.
+See <a class="reference internal" href="phreeqc.html"><span class="doc">PHREEQC coupling</span></a> before switching backends.</p>
+<p>Inspect <code class="docutils literal notranslate"><span class="pre">state.nbact</span></code> for modeled microbial populations and the appropriate
+component/tracer fields for transport. Consumption means hydrogen removed by
+microbial reactions; it is distinct from unrecovered gas during withdrawal.</p>
 </section>
 </section>
 
-
-           </div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="phreeqc.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">PHREEQC coupling</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="store.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Hydrogen storage in saline aquifers</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="store.html" class="btn btn-neutral float-left" title="Hydrogen Storage Simulation in Aquifers using Black-Oil Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="notebooks.html" class="btn btn-neutral float-right" title="Notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
     </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hydrogen storage in depleted gas reservoirs</a><ul>
+<li><a class="reference internal" href="#what-the-models-include">What the models include</a></li>
+<li><a class="reference internal" href="#five-cycle-2d-example">Five-cycle 2D example</a></li>
+<li><a class="reference internal" href="#hydrogen-consumption-by-three-microbial-reactions">Hydrogen consumption by three microbial reactions</a></li>
+<li><a class="reference internal" href="#hydrogen-plume-and-microbial-populations">Hydrogen plume and microbial populations</a></li>
+<li><a class="reference internal" href="#introductory-notebook">Introductory notebook</a></li>
+<li><a class="reference internal" href="#equation-ownership">Equation ownership</a></li>
+</ul>
+</li>
+</ul>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright .</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          </div>
         </div>
       </div>
-    </section>
+      
+      
+    </aside>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/mhchem"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "packages": {"[+]": ["mhchem"]}}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
 </html>

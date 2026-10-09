@@ -1,63 +1,88 @@
-============
 Installation
 ============
 
-The source code of H2sim can be installed using git. In this way, you can easily keep track of the
-last developments.
+Clone H2sim with its pinned dependencies, then initialize it from MATLAB.
+See :doc:`dependencies` for required and optional components.
 
-First, open a terminal and navigate to the directory where you would like to install H2sim. Then, clone the repository
-using the following command, which will include all the dependencies as submodules
+Clone the repository
+--------------------
 
 .. code-block:: shell
 
    git clone --recurse-submodules https://github.com/xavierr/h2-sim.git
+   cd h2-sim
 
-Then, open matlab and run
+For a checkout cloned without submodules:
+
+.. code-block:: shell
+
+   git submodule update --init --recursive
+
+Initialize MATLAB
+-----------------
+
+Open MATLAB and set its current folder to the cloned ``h2-sim`` directory.
+Then run:
 
 .. code-block:: matlab
-                
+
    startupH2sim
 
-Check your installation by running this simple example
+Use MATLAB R2021a or newer for the core examples. Startup adds H2sim modules
+and initializes dependencies. Do not add the complete MRST tree with ``genpath``.
+
+Run a first example
+-------------------
 
 .. code-block:: matlab
-                
-   simple1DBacterialExampleMetacet
 
+   result = exampleBlackOilAquifer2D;
 
-.. _MRST: https://www.sintef.no/Projectweb/MRST/
+This two-dimensional saline-aquifer example uses the black-oil model and
+requires neither PHREEQC nor Parallel Computing Toolbox. Continue with :doc:`quickstart` or :doc:`examples`.
 
+Optional AMGCL acceleration
+---------------------------
 
-Update existing installation
-============================
+This step is optional. The core examples can run without AMGCL.
 
-In the case where we alread have installed H2sim and you want to update to the latest version. As usual in git, you
-will do that by running
+Large compositional cases can use MRST's AMGCL CPR solver. Configure a C++
+compiler with ``mex -setup C++``, load ``mrstModule add linearsolvers``,
+and follow the AMGCL gateway build instructions in your pinned MRST checkout.
+The compiled gateway must match your MATLAB platform.
 
-.. code-block:: shell
+A gateway compiled in a separate local directory can be activated through
+MATLAB preferences:
 
-   git pull
+.. code-block:: matlab
 
-In addition to that, the dependencies that are given through git submodules. The are not updated often but, if it is the
-case, you will need to run in addition to the previous command,
+   setpref('H2sim', 'AMGCLGatewayPath', gatewayDirectory);
+   setpref('H2sim', 'AMGCLSourcePath', amgclSourceDirectory);
+   setpref('H2sim', 'BoostHeaderPath', boostHeaderDirectory);
+   assert(activateH2simAMGCL());
 
-.. code-block:: shell
+``gatewayDirectory`` contains MRST's gateway files and its ``utils`` directory
+with ``amgcl_matlab`` compiled for your platform. A standard MRST installation
+can keep its existing solver paths. AMGCL does not require Parallel Computing
+Toolbox.
 
-   git submodule update --recursive
+Optional PHREEQC setup
+----------------------
 
-Dependencies
-============
+This step is needed only for examples that couple H2sim to PHREEQC.
 
-The depencies are included as submodules so that no special installation for those is needed.
+Install and register IPhreeqcCOM from the
+`USGS PHREEQC distribution <https://www.usgs.gov/software/phreeqc-version-3>`_
+on Windows. Test the COM interface and the bundled database:
 
-The package is built upon
+.. code-block:: matlab
 
-- **MATLAB**: Version R2021a or newer
-- **MRST**: MATLAB Reservoir Simulation Toolbox (2023b or newer), see `MRST`_
-- **MRST Modules**:
+   db = which('h2_biogeochemistry.dat');
+   assert(~isempty(db), 'Initialize H2sim first.');
+   iph = actxserver('IPhreeqcCOM.Object');
+   status = iph.LoadDatabase(db);
+   assert(status == 0);
+   delete(iph);
 
-  - ``compositional``
-  - ``ad-blackoil``
-  - ``ad-core``
-  - ``ad-props``
-
+Configure ``phreeqcComProgId`` if your COM installation uses a different
+identifier. ``phreeqcDatabaseFile`` must resolve to an absolute database path.

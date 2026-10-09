@@ -1,0 +1,81 @@
+/* H2sim: three model families, readable science, responsive navigation. */
+body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.content {width:min(100%,58rem)} .main .content {max-width:58rem}
+.sidebar-brand {padding:1.8rem 1.2rem 1.1rem} .sidebar-logo {max-width:176px}
+.sidebar-tree .caption {letter-spacing:.08em;font-size:.69rem;margin-top:1.5rem}
+h1,h2,h3 {letter-spacing:-.035em;font-weight:700} h1 {font-size:2.6rem} h2 {font-size:1.7rem}
+article p,article li {line-height:1.7}
+.home-hero {display:grid;grid-template-columns:1.06fr 1fr;gap:1rem;align-items:center;background:#102c36;color:#edf6f3;padding:2.8rem 2.2rem 2rem;border-radius:1.4rem;margin:1rem 0 2.7rem;box-shadow:0 18px 40px #102c3612}
+.home-hero h1 {color:#f4fbf8;font-size:clamp(2rem,3vw,3.1rem);line-height:1.08;margin:.8rem 0 1.3rem}
+.eyebrow {color:#87d7ca;font-size:.62rem;letter-spacing:.14em;font-weight:700;margin:0}
+.hero-description {color:#c3d6d8;font-size:.99rem;line-height:1.7;max-width:24rem}
+.hero-actions {display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:1.7rem}
+a.primary-button {background:#b8ede0;color:#123f43;font-weight:700;padding:.8rem 1.1rem;border-radius:.5rem;text-decoration:none;font-size:.85rem} a.primary-button:hover {background:#d7f8ed}
+a.secondary-button {color:#ecf8f4;text-decoration:none;font-size:.83rem} a.secondary-button:hover {color:#b8ede0}
+.hero-figure {margin:0}.hero-figure img {display:block;width:100%;height:auto}.hero-figure figcaption {color:#afc9cc;font-size:.73rem;text-align:center;margin:.3rem 0 0}
+.sd-card {border-radius:.75rem!important;box-shadow:none!important;border-color:var(--color-background-border)!important;overflow:hidden;transition:transform .15s,border-color .15s}
+.sd-card:hover {transform:translateY(-3px);border-color:#78bcb7!important}.sd-card-title {font-size:1.02rem;letter-spacing:-.02em}.sd-card-body {padding:1.3rem!important}.sd-card-footer {background:transparent!important;font-size:.82rem;color:var(--color-brand-content)}
+.feature-grid {margin-top:1.1rem}article table.docutils {font-size:.88rem}article table.docutils td {padding:.8rem}article .highlight {border-radius:.65rem}article figure {margin:1.7rem 0}article figure img {border-radius:.7rem;border:1px solid var(--color-background-border)}article figcaption {font-size:.82rem;color:var(--color-foreground-secondary);line-height:1.65}
+.platform-note {margin-top:2rem!important}a:focus-visible {outline:3px solid #dca758;outline-offset:4px;border-radius:3px}
+@media(min-width:1200px){.main {flex-basis:62rem}}
+@media(max-width:860px){.home-hero {grid-template-columns:1fr;padding:2rem 1.5rem}.hero-copy {max-width:35rem}.hero-figure {max-width:26rem;margin:auto}.home-hero h1 {font-size:2.7rem}}
+@media(max-width:480px){.home-hero {padding:1.5rem 1.15rem;border-radius:1rem;margin-top:.5rem}.home-hero h1 {font-size:2.2rem}h1 {font-size:2rem}}
+@media(prefers-reduced-motion:reduce){.sd-card {transition:none}.sd-card:hover {transform:none}}
+
+/* Keep the hero below Furo's floated page tools on narrow screens. */
+.home-hero {clear:both;width:100%;box-sizing:border-box}
+.home-hero~section>h1 {font-size:1.85rem;letter-spacing:-.025em}
+.platform-note {border-left-color:#087f82!important}
+.platform-note>.admonition-title {background:#d8efea!important;color:#17474a!important}
+.platform-note>.admonition-title::before {background-color:#087f82!important}
+body[data-theme="dark"] .platform-note>.admonition-title {background:#244d50!important;color:#c4eee5!important}
+
+/* Allow long notebook code/output cells to scroll within the article. */
+.main,.main .content,.nbinput,.nboutput {min-width:0}
+.main .content {width:100%}
+.nbinput .input_area,.nboutput .output_area {min-width:0;max-width:100%;overflow-x:auto}
+
+/* Native disclosure panels: keyboard accessible and usable without JavaScript. */
+.assessment-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;align-items:start;margin:1.6rem 0 2.2rem}
+.assessment-card {border:1px solid var(--color-background-border);border-radius:1rem;overflow:hidden;background:var(--color-background-secondary);transition:border-color .18s,box-shadow .18s}
+.assessment-card:hover,.assessment-card[open] {border-color:#087f82;box-shadow:0 8px 24px #087f8214}
+.assessment-card summary {cursor:pointer;list-style:none;display:block;padding:0 1.1rem 1.15rem}
+.assessment-card summary::-webkit-details-marker {display:none}
+.assessment-card summary:focus-visible {outline:3px solid #dca758;outline-offset:-4px;border-radius:1rem}
+.assessment-visual {display:flex;align-items:center;justify-content:center;height:auto;aspect-ratio:3/2;margin:0 -1.1rem 1.1rem;background:#f8f6f0;border-bottom:1px solid var(--color-background-border);padding:0;box-sizing:border-box}
+.assessment-visual img {width:100%;height:100%;object-fit:cover}
+.assessment-number {display:block;color:var(--color-brand-content);font-size:.62rem;letter-spacing:.08em;font-weight:700;margin-bottom:.55rem}
+.assessment-title {display:block;font-size:1.2rem;line-height:1.25;font-weight:700;letter-spacing:-.025em;min-height:3rem}
+.assessment-question {display:block;color:var(--color-foreground-secondary);font-size:.85rem;line-height:1.55;min-height:4rem;margin:.6rem 0}
+.assessment-toggle {display:flex;justify-content:space-between;color:var(--color-brand-content);font-size:.78rem;font-weight:600}
+.assessment-card .when-open {display:none}
+.assessment-card[open] .when-open {display:inline}
+.assessment-card[open] .when-closed {display:none}
+.assessment-card[open] .assessment-toggle>span:last-child {transform:rotate(45deg)}
+.assessment-description {padding:0 1.1rem 1.25rem;border-top:1px solid var(--color-background-border);font-size:.86rem}
+.assessment-description p {line-height:1.7}
+.assessment-description a {display:block;margin-top:.7rem;font-weight:600;font-size:.8rem}
+@media(max-width:700px){.assessment-grid{grid-template-columns:1fr}.assessment-title,.assessment-question{min-height:0}}
+@media(prefers-reduced-motion:reduce){.assessment-card{transition:none}}
+
+
+/* Featured community event */
+.event-feature {display:grid;grid-template-columns:180px minmax(0,1fr);gap:2rem;padding:2rem;border:1px solid var(--color-background-border);border-radius:20px;background:var(--color-background-secondary);margin:1.5rem 0;}
+.event-speaker img {width:180px;height:180px;object-fit:cover;border-radius:50%;}
+.event-speaker p {font-size:.9rem;text-align:center;}
+.event-feature h2 {margin-top:.3rem;}
+.event-source {font-size:.8rem;margin-top:1.2rem;}
+@media(max-width:700px){.event-feature{grid-template-columns:1fr;padding:1.2rem;gap:1rem}.event-speaker{text-align:center}.event-speaker img{width:130px;height:130px}}
+
+/* First-release announcement */
+.release-announcement {margin:1.5rem 0 2rem;padding:2rem;border:2px solid var(--color-brand-primary);border-radius:20px;background:var(--color-background-secondary);box-shadow:0 8px 26px rgba(8,127,130,.10);}
+.release-announcement h2 {margin-top:.3rem;font-size:1.8rem;line-height:1.2;}
+.release-announcement .eyebrow {color:var(--color-brand-content);font-weight:750;letter-spacing:.09em;}
+@media(max-width:700px){.release-announcement{padding:1.2rem}.release-announcement h2{font-size:1.5rem}}
+
+.release-logos {display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.release-logos .release-h2sim-logo {width:190px;height:auto;}
+.release-logos span {font-size:.85rem;font-weight:600;color:var(--color-foreground-secondary);}
+.release-logos a {display:block;max-width:100%;padding:.65rem .8rem;background:white;border-radius:10px;}
+.release-logos .release-mrst-logo {display:block;width:300px;max-width:100%;height:auto;}
+@media(max-width:700px){.release-logos{gap:.7rem}.release-logos .release-mrst-logo{width:250px}}
